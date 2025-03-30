@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\merav\Documents\GitHub\2048-ml\venv"
+VIRTUAL_ENV="C:\Users\Yuval\Unity Projects\2048-ml\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
