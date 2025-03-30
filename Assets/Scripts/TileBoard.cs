@@ -104,11 +104,11 @@ public class TileBoard : MonoBehaviour
             movesWithoutChange = 0;  
         } else{
             if(movesWithoutChange <= 10){
-                player.RewardAdd(-0.1f);
+                player.RewardAdd(-2 * empty);
                 player.RequestDecision();
                 movesWithoutChange++;
             } else{
-                player.RewardAdd(-10f);
+                player.RewardAdd(-100f);
                 movesWithoutChange = 0;
                 player.End();
             }
