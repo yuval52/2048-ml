@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
 
 public class TileBoard : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class TileBoard : MonoBehaviour
 
     public int empty = 16;
     public Player player;
+
+    private int movesWithoutChange = 0;
 
     private void Awake()
     {
@@ -48,7 +51,7 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
         
         empty = grid.Size - tiles.Count;
-        player.Reward(empty);
+        player.RewardAdd(empty);
     }
 
     // private void Update()
@@ -98,6 +101,18 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
+            movesWithoutChange = 0;  
+        } else{
+            if(movesWithoutChange <= 10){
+                player.RewardAdd(-0.1f);
+                player.RequestDecision();
+                movesWithoutChange++;
+            } else{
+                player.RewardAdd(-10f);
+                movesWithoutChange = 0;
+                player.End();
+            }
+            
         }
 
         
@@ -167,7 +182,7 @@ public class TileBoard : MonoBehaviour
     {
         waiting = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
         waiting = false;
 
@@ -182,6 +197,8 @@ public class TileBoard : MonoBehaviour
         if (CheckForGameOver()) {
             GameManager.Instance.GameOver();
         }
+
+        player.RequestDecision();
     }
 
     public bool CheckForGameOver()

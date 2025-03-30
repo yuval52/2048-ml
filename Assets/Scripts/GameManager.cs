@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
+        player.RequestDecision();
     }
 
     public void GameOver()

@@ -9,15 +9,27 @@ public class Player : Agent
 {
     public TileBoard board;
     public GameManager manager;
+
+    public int maxTurns = 10000;
+    private int turns = 0;
    
     public override void OnActionReceived(ActionBuffers actions){
         board.MakeMove(actions.DiscreteActions[0]);
-        //Debug.Log(actions.DiscreteActions[0]);
+        if(turns >= maxTurns){
+            End();
+        }
+        turns++;
+        Debug.Log(actions.DiscreteActions[0]);
     }
 
     public void Reward(float reward){
         SetReward(reward);
-        Debug.Log(reward);
+        //Debug.Log(reward);
+    }
+
+    public void RewardAdd(float reward){
+        AddReward(reward);
+        //Debug.Log(reward);
     }
 
     public void End(){
@@ -25,6 +37,7 @@ public class Player : Agent
     }
 
     public override void OnEpisodeBegin(){
+        turns = 0;
         manager.NewGame();
     }
 
