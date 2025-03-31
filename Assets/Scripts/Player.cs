@@ -24,10 +24,10 @@ public class Player : Agent
         //Debug.Log(actions.DiscreteActions[0]);
     }
 
-    public void Reward(float reward){
-        SetReward(reward);
-        //Debug.Log(reward);
-    }
+    //public void Reward(float reward){
+    //    SetReward(reward);
+    //    //Debug.Log(reward);
+    //}
 
     public void RewardAdd(float reward){
         AddReward(reward);
@@ -41,6 +41,7 @@ public class Player : Agent
     public override void OnEpisodeBegin(){
         turns = 0;
         manager.NewGame();
+        SetReward(0);
     }
 
     public override void CollectObservations(VectorSensor sensor){

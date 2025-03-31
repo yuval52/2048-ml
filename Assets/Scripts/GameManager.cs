@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         board.enabled = false;
-        player.Reward(-1000);
+        player.RewardAdd(-1000);
         player.End();
         //gameOver.interactable = true;
 
