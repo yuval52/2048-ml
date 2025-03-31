@@ -72,18 +72,90 @@ public class TileBoard : MonoBehaviour
     public void MakeMove(float[] moves){
         if (waiting) return;
 
-        int[] moveArr = { 1, 2, 3, 4};
-        
+        int[] moveArr = { 0, 1, 2, 3};
 
-        //if (move == 1) {
-        //    Move(Vector2Int.up, 0, 1, 1, 1);
-        //} else if (move == 2) {
-        //    Move(Vector2Int.left, 1, 1, 0, 1);
-        //} else if (move == 0) {
-        //    Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-        //} else if (move == 3) {
-        //    Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-        //}
+        float large = moves[0];
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            if (moves[i] > large)
+            {
+                large = moves[i];
+                index = i;
+            }
+        }
+        if (index != 0)
+        {
+            float buffer = moves[0];
+            moves[0] = moves[index];
+            moves[index] = buffer;
+
+            int numBuffer = moveArr[0];
+            moveArr[0] = moveArr[index];
+            moveArr[index] = numBuffer;
+        }
+
+        large = moves[1];
+        index = 1;
+        for (int i = 1; i < 4; i++)
+        {
+            if (moves[i] > large)
+            {
+                large = moves[i];
+                index = i;
+            }
+        }
+        if (index != 1)
+        {
+            float buffer = moves[1];
+            moves[1] = moves[index];
+            moves[index] = buffer;
+
+            int numBuffer = moveArr[1];
+            moveArr[1] = moveArr[index];
+            moveArr[index] = numBuffer;
+        }
+
+        if (moves[3] > moves[2])
+        {
+            float buffer = moves[2];
+            moves[2] = moves[3];
+            moves[3] = buffer;
+
+            int numBuffer = moveArr[2];
+            moveArr[2] = moveArr[3];
+            moveArr[3] = numBuffer;
+        }
+
+        for (int i = 0; i < moveArr.Length; i++)
+        {
+            int move = moveArr[i];
+            bool changed = false;
+            if (move == 1)
+            {
+                changed = Move(Vector2Int.up, 0, 1, 1, 1);
+            }
+            else if (move == 2)
+            {
+                changed = Move(Vector2Int.left, 1, 1, 0, 1);
+            }
+            else if (move == 0)
+            {
+                changed = Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+            }
+            else if (move == 3)
+            {
+                changed = Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+            }
+
+            if (changed)
+            {
+                break;
+            }
+
+        }
+
+
+        
 
     }
 
