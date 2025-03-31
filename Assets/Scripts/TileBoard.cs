@@ -69,21 +69,25 @@ public class TileBoard : MonoBehaviour
     //     }
     // }
 
-    public void MakeMove(int move){
+    public void MakeMove(float[] moves){
         if (waiting) return;
 
-        if (move == 1) {
-            Move(Vector2Int.up, 0, 1, 1, 1);
-        } else if (move == 2) {
-            Move(Vector2Int.left, 1, 1, 0, 1);
-        } else if (move == 0) {
-            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-        } else if (move == 3) {
-            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-        }
+        int[] moveArr = { 1, 2, 3, 4};
+        
+
+        //if (move == 1) {
+        //    Move(Vector2Int.up, 0, 1, 1, 1);
+        //} else if (move == 2) {
+        //    Move(Vector2Int.left, 1, 1, 0, 1);
+        //} else if (move == 0) {
+        //    Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+        //} else if (move == 3) {
+        //    Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+        //}
+
     }
 
-    private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
+    private bool Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         bool changed = false;
 
@@ -101,19 +105,22 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
-            movesWithoutChange = 0;  
+            movesWithoutChange = 0;
+            //return changed;
         } else{
-            if(movesWithoutChange <= 10){
-                player.RewardAdd(-2 * empty);
-                player.RequestDecision();
-                movesWithoutChange++;
-            } else{
-                player.RewardAdd(-100f);
-                movesWithoutChange = 0;
-                player.End();
-            }
+            //if(movesWithoutChange <= 10){
+            //    player.RewardAdd(-2 * empty);
+            //    player.RequestDecision();
+            //    movesWithoutChange++;
+            //} else{
+            //    player.RewardAdd(-100f);
+            //    movesWithoutChange = 0;
+            //    player.End();
+            //}
+            //return changed;
             
         }
+        return changed;
 
         
     }

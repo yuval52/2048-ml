@@ -14,12 +14,14 @@ public class Player : Agent
     private int turns = 0;
    
     public override void OnActionReceived(ActionBuffers actions){
-        board.MakeMove(actions.DiscreteActions[0]);
+        //board.MakeMove(actions.ContinuousActions);
+        float[] moves = { actions.ContinuousActions[0], actions.ContinuousActions[1] , actions.ContinuousActions[2] , actions.ContinuousActions[3]};
+        board.MakeMove(moves);
         if(turns >= maxTurns){
             End();
         }
         turns++;
-        Debug.Log(actions.DiscreteActions[0]);
+        //Debug.Log(actions.DiscreteActions[0]);
     }
 
     public void Reward(float reward){
