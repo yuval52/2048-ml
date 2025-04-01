@@ -15,7 +15,7 @@ behaviors:
     network_settings:
       normalize: false
       hidden_units: 512
-      num_layers: 3
+      num_layers: 4
     reward_signals:
       extrinsic:
         gamma: 0.99

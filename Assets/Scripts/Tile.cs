@@ -11,11 +11,13 @@ public class Tile : MonoBehaviour
 
     private Image background;
     private TextMeshProUGUI text;
+    public GameManager manager;
 
     private void Awake()
     {
         background = GetComponent<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
+        manager = FindObjectOfType<GameManager>();
     }
 
     public void SetState(TileState state)
@@ -66,7 +68,7 @@ public class Tile : MonoBehaviour
     private IEnumerator Animate(Vector3 to, bool merging)
     {
         float elapsed = 0f;
-        float duration = 0.01f;
+        float duration = manager.moveTime;
 
         Vector3 from = transform.position;
 

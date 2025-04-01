@@ -15,11 +15,14 @@ public class TileBoard : MonoBehaviour
     public int empty = 16;
     public Player player;
 
+    public GameManager manager;
+
     private int movesWithoutChange = 0;
 
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
+        //manager = GetComponent<GameManager>();
         tiles = new List<Tile>(16);
     }
 
@@ -261,7 +264,7 @@ public class TileBoard : MonoBehaviour
     {
         waiting = true;
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(manager.moveTime);
 
         waiting = false;
 

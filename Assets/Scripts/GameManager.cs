@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+    public float moveTime = 0.01f;
+
     public int score { get; private set; } = 0;
 
     private void Awake()
