@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI hiscoreText;
 
     public Player player;
+
+    public int[] highestTiles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int highest = 2;
 
     public float moveTime = 0.01f;
 
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        NewGame();
+        //NewGame();
     }
 
     public void NewGame()
@@ -54,13 +58,20 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
+        //Debug.Log(numGames);
+        Debug.Log("[" + highestTiles[0] + ", " + highestTiles[1] + ", " + highestTiles[2] + ", " + highestTiles[3] + ", " + highestTiles[4] + ", " + highestTiles[5] + ", " + highestTiles[6] + ", " + highestTiles[7] + ", " + highestTiles[8] + ", " + highestTiles[9] + ", " + highestTiles[10] + "]");
+        //Debug.Log(highest);
         player.RequestDecision();
     }
 
     public void GameOver()
     {
+        int log = (int)Math.Log(board.highestNum, 2);
+        highestTiles[log - 2] = highestTiles[log - 2] + 1;
+        //highest = board.highestNum;
         board.enabled = false;
         player.RewardAdd(-1000);
+        //numGames++;
         player.End();
         //gameOver.interactable = true;
 

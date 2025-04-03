@@ -15,6 +15,8 @@ public class TileBoard : MonoBehaviour
     public int empty = 16;
     public Player player;
 
+    public int highestNum = 2;
+
     public GameManager manager;
 
     private int movesWithoutChange = 0;
@@ -37,6 +39,7 @@ public class TileBoard : MonoBehaviour
         }
 
         tiles.Clear();
+        highestNum = 2;
     }
 
     public void CreateTile()
@@ -245,6 +248,9 @@ public class TileBoard : MonoBehaviour
         TileState newState = tileStates[index];
 
         b.SetState(newState);
+        if(newState.number > highestNum){
+            highestNum = newState.number;
+        }
         GameManager.Instance.IncreaseScore(newState.number);
     }
 

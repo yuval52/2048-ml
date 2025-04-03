@@ -1,0 +1,65 @@
+{
+    "Player": {
+        "checkpoints": [
+            {
+                "steps": 499976,
+                "file_path": "results\\run24\\Player\\Player-499976.onnx",
+                "reward": null,
+                "creation_time": 1743635470.8188834,
+                "auxillary_file_paths": [
+                    "results\\run24\\Player\\Player-499976.pt"
+                ]
+            },
+            {
+                "steps": 999989,
+                "file_path": "results\\run24\\Player\\Player-999989.onnx",
+                "reward": null,
+                "creation_time": 1743641101.3166137,
+                "auxillary_file_paths": [
+                    "results\\run24\\Player\\Player-999989.pt"
+                ]
+            },
+            {
+                "steps": 1499967,
+                "file_path": "results\\run24\\Player\\Player-1499967.onnx",
+                "reward": null,
+                "creation_time": 1743646749.6693308,
+                "auxillary_file_paths": [
+                    "results\\run24\\Player\\Player-1499967.pt"
+                ]
+            },
+            {
+                "steps": 1999981,
+                "file_path": "results\\run24\\Player\\Player-1999981.onnx",
+                "reward": null,
+                "creation_time": 1743652466.574737,
+                "auxillary_file_paths": [
+                    "results\\run24\\Player\\Player-1999981.pt"
+                ]
+            },
+            {
+                "steps": 2099479,
+                "file_path": "results\\run24\\Player\\Player-2099479.onnx",
+                "reward": -771.0,
+                "creation_time": 1743653661.1361163,
+                "auxillary_file_paths": [
+                    "results\\run24\\Player\\Player-2099479.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2099479,
+            "file_path": "results\\run24\\Player.onnx",
+            "reward": -771.0,
+            "creation_time": 1743653661.1361163,
+            "auxillary_file_paths": [
+                "results\\run24\\Player\\Player-2099479.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

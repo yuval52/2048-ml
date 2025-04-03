@@ -16,10 +16,13 @@ behaviors:
       normalize: false
       hidden_units: 512
       num_layers: 4
+      deterministic: true
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1.0
+        network_settings:
+          deterministic: true
     max_steps: 10000000
     time_horizon: 64
     summary_freq: 10000

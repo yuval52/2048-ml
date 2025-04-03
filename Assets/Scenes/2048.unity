@@ -1570,6 +1570,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   empty: 16
   player: {fileID: 1493065536}
+  highestNum: 2
   manager: {fileID: 1601929139}
 --- !u!1 &1095350276
 GameObject:
@@ -2195,7 +2196,7 @@ MonoBehaviour:
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Player
   TeamId: 0
@@ -2309,6 +2310,8 @@ MonoBehaviour:
   board: {fileID: 997205597}
   scoreText: {fileID: 791552736}
   player: {fileID: 1493065536}
+  highestTiles: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  highest: 2
   moveTime: 0.01
 --- !u!4 &1601929140
 Transform:
