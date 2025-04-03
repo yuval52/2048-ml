@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
+using System;
 
 public class TileBoard : MonoBehaviour
 {
@@ -13,13 +14,14 @@ public class TileBoard : MonoBehaviour
     private bool waiting;
 
     public int empty = 16;
+    public int prevEmpty = 16;
     public Player player;
 
     public int highestNum = 2;
 
     public GameManager manager;
 
-    private int movesWithoutChange = 0;
+    //private int movesWithoutChange = 0;
 
     private void Awake()
     {
@@ -47,7 +49,7 @@ public class TileBoard : MonoBehaviour
         Tile tile = Instantiate(tilePrefab, grid.transform);
 
         
-        int num = Random.Range(0, 10);
+        int num = UnityEngine.Random.Range(0, 10);
         if(num == 9){
             tile.SetState(tileStates[1]);
         } else{
@@ -57,7 +59,8 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
         
         empty = grid.Size - tiles.Count;
-        player.RewardAdd(empty);
+        player.RewardAdd(empty-prevEmpty);
+        prevEmpty = empty;
     }
 
     // private void Update()
@@ -183,7 +186,7 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
-            movesWithoutChange = 0;
+            //movesWithoutChange = 0;
             //return changed;
         } else{
             //if(movesWithoutChange <= 10){
@@ -250,6 +253,7 @@ public class TileBoard : MonoBehaviour
         b.SetState(newState);
         if(newState.number > highestNum){
             highestNum = newState.number;
+            player.AddReward((int)Math.Log(highestNum, 2));
         }
         GameManager.Instance.IncreaseScore(newState.number);
     }

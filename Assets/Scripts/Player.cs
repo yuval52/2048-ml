@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -10,17 +11,17 @@ public class Player : Agent
     public TileBoard board;
     public GameManager manager;
 
-    public int maxTurns = 10000;
-    private int turns = 0;
+    //public int maxTurns = 10000;
+    //private int turns = 0;
    
     public override void OnActionReceived(ActionBuffers actions){
         //board.MakeMove(actions.ContinuousActions);
         float[] moves = { actions.ContinuousActions[0], actions.ContinuousActions[1] , actions.ContinuousActions[2] , actions.ContinuousActions[3]};
         board.MakeMove(moves);
-        if(turns >= maxTurns){
-            End();
-        }
-        turns++;
+        //if(turns >= maxTurns){
+        //    End();
+        //}
+        //turns++;
         //Debug.Log(actions.DiscreteActions[0]);
     }
 
@@ -39,7 +40,7 @@ public class Player : Agent
     }
 
     public override void OnEpisodeBegin(){
-        turns = 0;
+        //turns = 0;
         manager.NewGame();
         SetReward(0);
     }
@@ -48,7 +49,7 @@ public class Player : Agent
         int[,] matrix = board.grid.GetGridMatrix();
         for(int x = 0; x < 4; x++){
             for(int y = 0; y < 4; y++){
-                sensor.AddObservation(matrix[x,y]);
+                sensor.AddObservation((int)Math.Log(matrix[x,y], 2));
             }
         }
     }
