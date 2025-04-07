@@ -84,8 +84,8 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < highestTiles.Length; i++)
         {
-            sliders[i].GetComponent<Slider>().value = (highestTiles[i] / highestTiles[topIndex]);
-            percentageTiles[i] = (highestTiles[i] / highestTiles[topIndex]);
+            sliders[i].GetComponent<Slider>().value = ((float)highestTiles[i] / (float)highestTiles[topIndex]);
+            percentageTiles[i] = ((float)highestTiles[i] / (float)highestTiles[topIndex]);
         }
     }
 
