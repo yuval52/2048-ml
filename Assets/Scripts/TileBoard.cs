@@ -59,7 +59,7 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
         
         empty = grid.Size - tiles.Count;
-        player.RewardAdd(empty-prevEmpty);
+        player.RewardAdd(2 * (empty-prevEmpty));
         prevEmpty = empty;
     }
 
@@ -253,7 +253,9 @@ public class TileBoard : MonoBehaviour
         b.SetState(newState);
         if(newState.number > highestNum){
             highestNum = newState.number;
-            player.AddReward((int)Math.Log(highestNum, 2));
+            player.AddReward(5 * (int)Math.Log(highestNum, 2));
+        } else{
+            player.AddReward((int)Math.Log(newState.number, 2));
         }
         GameManager.Instance.IncreaseScore(newState.number);
     }
