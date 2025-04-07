@@ -2,6 +2,8 @@ using System.Collections;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
@@ -16,7 +18,10 @@ public class GameManager : MonoBehaviour
     public Player player;
 
     public int[] highestTiles = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public float[] percentageTiles = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int highest = 2;
+
+    public GameObject[] sliders;
 
     public float moveTime = 0.01f;
 
@@ -59,15 +64,36 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.enabled = true;
         //Debug.Log(numGames);
-        Debug.Log("[" + highestTiles[0] + ", " + highestTiles[1] + ", " + highestTiles[2] + ", " + highestTiles[3] + ", " + highestTiles[4] + ", " + highestTiles[5] + ", " + highestTiles[6] + ", " + highestTiles[7] + ", " + highestTiles[8] + ", " + highestTiles[9] + ", " + highestTiles[10] + "]");
+        //Debug.Log("[" + highestTiles[0] + ", " + highestTiles[1] + ", " + highestTiles[2] + ", " + highestTiles[3] + ", " + highestTiles[4] + ", " + highestTiles[5] + ", " + highestTiles[6] + ", " + highestTiles[7] + ", " + highestTiles[8] + ", " + highestTiles[9] + ", " + highestTiles[10] + "]");
+        Debug.Log("[" + percentageTiles[0] + ", " + percentageTiles[1] + ", " + percentageTiles[2] + ", " + percentageTiles[3] + ", " + percentageTiles[4] + ", " + percentageTiles[5] + ", " + percentageTiles[6] + ", " + percentageTiles[7] + ", " + percentageTiles[8] + ", " + percentageTiles[9] + ", " + percentageTiles[10] + "]");
         //Debug.Log(highest);
         player.RequestDecision();
+    }
+
+    private void updateGraph()
+    {
+        int topIndex = 0;
+       //int topValue = 0;
+        for (int i = 0; i < highestTiles.Length; i++)
+        {
+            if (highestTiles[i] > highestTiles[topIndex])
+            {
+                topIndex = i;
+            }
+        }
+
+        for (int i = 0; i < highestTiles.Length; i++)
+        {
+            sliders[i].GetComponent<Slider>().value = (highestTiles[i] / highestTiles[topIndex]);
+            percentageTiles[i] = (highestTiles[i] / highestTiles[topIndex]);
+        }
     }
 
     public void GameOver()
     {
         int log = (int)Math.Log(board.highestNum, 2);
-        highestTiles[log - 2] = highestTiles[log - 2] + 1;
+        highestTiles[log - 1] = highestTiles[log - 1] + 1;
+        updateGraph();
         //highest = board.highestNum;
         board.enabled = false;
         player.RewardAdd(-1000);
