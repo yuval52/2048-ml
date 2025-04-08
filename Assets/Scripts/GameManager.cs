@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         updateGraph();
         //highest = board.highestNum;
         board.enabled = false;
-        player.RewardAdd(-1000);
+        player.RewardAdd(-100);
         //numGames++;
         player.End();
         //gameOver.interactable = true;
