@@ -59,7 +59,7 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
         
         empty = grid.Size - tiles.Count;
-        player.RewardAdd(2 * (empty-prevEmpty));
+        player.RewardAdd(3 * (empty-prevEmpty));
         prevEmpty = empty;
     }
 
