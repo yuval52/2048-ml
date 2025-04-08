@@ -25,5 +25,4 @@ behaviors:
           deterministic: false
     max_steps: 10000000
     time_horizon: 128
-    threaded: true
     summary_freq: 10000
