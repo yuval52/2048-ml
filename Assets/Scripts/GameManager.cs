@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
     private void updateGraph()
     {
         int topIndex = 0;
-       //int topValue = 0;
         for (int i = 0; i < highestTiles.Length; i++)
         {
             if (highestTiles[i] > highestTiles[topIndex])
@@ -96,7 +95,7 @@ public class GameManager : MonoBehaviour
         updateGraph();
         //highest = board.highestNum;
         board.enabled = false;
-        player.RewardAdd(-100);
+        //player.RewardAdd(-100);
         //numGames++;
         player.End();
         //gameOver.interactable = true;

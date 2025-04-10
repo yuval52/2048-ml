@@ -16,13 +16,14 @@ public class Player : Agent
    
     public override void OnActionReceived(ActionBuffers actions){
         //board.MakeMove(actions.ContinuousActions);
-        float[] moves = { actions.ContinuousActions[0], actions.ContinuousActions[1] , actions.ContinuousActions[2] , actions.ContinuousActions[3]};
-        board.MakeMove(moves);
+        // float[] moves = { actions.ContinuousActions[0], actions.ContinuousActions[1] , actions.ContinuousActions[2] , actions.ContinuousActions[3]};
+        // board.MakeMove(moves);
         //if(turns >= maxTurns){
         //    End();
         //}
         //turns++;
         //Debug.Log(actions.DiscreteActions[0]);
+        board.MakeMove(actions.DiscreteActions[0]);
     }
 
     //public void Reward(float reward){
@@ -51,6 +52,24 @@ public class Player : Agent
             for(int y = 0; y < 4; y++){
                 sensor.AddObservation((int)Math.Log(matrix[x,y], 2));
             }
+        }
+        //SetActionMask(0, 1);
+    }
+
+    // public override void CollectDiscreteActionMasks()
+    // {
+    //     List<int> mask = new List<int>();
+
+    //     for(int i = 0; i < 4; i++)
+    //     {
+
+    //     }
+    // }
+
+    public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
+    {
+        for(int i = 0; i < 4; i++){
+            actionMask.SetActionEnabled(0, i, board.CanMakeMove(i));
         }
     }
 
