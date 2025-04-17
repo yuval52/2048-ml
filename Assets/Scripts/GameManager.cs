@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("[" + highestTiles[0] + ", " + highestTiles[1] + ", " + highestTiles[2] + ", " + highestTiles[3] + ", " + highestTiles[4] + ", " + highestTiles[5] + ", " + highestTiles[6] + ", " + highestTiles[7] + ", " + highestTiles[8] + ", " + highestTiles[9] + ", " + highestTiles[10] + "]");
         //Debug.Log("[" + percentageTiles[0] + ", " + percentageTiles[1] + ", " + percentageTiles[2] + ", " + percentageTiles[3] + ", " + percentageTiles[4] + ", " + percentageTiles[5] + ", " + percentageTiles[6] + ", " + percentageTiles[7] + ", " + percentageTiles[8] + ", " + percentageTiles[9] + ", " + percentageTiles[10] + "]");
         //Debug.Log(highest);
+        //player.RewardSet(0f);
         player.RequestDecision();
     }
 

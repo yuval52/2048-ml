@@ -24,12 +24,13 @@ public class Player : Agent
         //turns++;
         //Debug.Log(actions.DiscreteActions[0]);
         board.MakeMove(actions.DiscreteActions[0]);
+        //Debug.Log("->" + actions.DiscreteActions[0]);
     }
 
-    //public void Reward(float reward){
-    //    SetReward(reward);
-    //    //Debug.Log(reward);
-    //}
+    public void RewardSet(float reward){
+       SetReward(reward);
+       //Debug.Log(reward);
+    }
 
     public void RewardAdd(float reward){
         AddReward(reward);
@@ -53,7 +54,24 @@ public class Player : Agent
                 sensor.AddObservation((int)Math.Log(matrix[x,y], 2));
             }
         }
-        //SetActionMask(0, 1);
+        
+        // for (int i = 0; i < 4; i++)
+        // {
+        //     Debug.Log("------------");
+        //     if (!board.CanMakeMove(i))
+        //     {
+        //         ActionMasks.SetActionEnabled(0, i, false); // Disable this action
+        //         if(i == 0){
+        //             Debug.Log("down");
+        //         } else if(i == 1){
+        //             Debug.Log("up");
+        //         } else if(i == 2){
+        //             Debug.Log("left");
+        //         } else if(i == 3){
+        //             Debug.Log("right");
+        //         }
+        //     }
+        // }
     }
 
     // public override void CollectDiscreteActionMasks()
@@ -68,8 +86,13 @@ public class Player : Agent
 
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
     {
+        Debug.Log("------------");
         for(int i = 0; i < 4; i++){
-            actionMask.SetActionEnabled(0, i, board.CanMakeMove(i));
+            bool possible = board.CanMakeMove(i);
+            actionMask.SetActionEnabled(0, i, possible);
+            if(!possible){
+                //Debug.Log(i);
+            }
         }
     }
 

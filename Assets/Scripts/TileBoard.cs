@@ -23,7 +23,7 @@ public class TileBoard : MonoBehaviour
 
     public GameManager manager;
 
-    //private int movesWithoutChange = 0;
+    private int movesWithoutChange = 0;
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class TileBoard : MonoBehaviour
         // empty = grid.Size - tiles.Count;
         // player.RewardAdd(3 * (empty-prevEmpty));
         // prevEmpty = empty;
-        player.RewardAdd(0.1f * (float)empty / 16.0f);
+        player.RewardAdd(1f * (float)empty / 16.0f);
     }
 
     // private void Update()
@@ -242,19 +242,21 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
-            //movesWithoutChange = 0;
-            //return changed;
+            movesWithoutChange = 0;
+            // return changed;
         } else{
-            //if(movesWithoutChange <= 10){
-            //    player.RewardAdd(-2 * empty);
-            //    player.RequestDecision();
-            //    movesWithoutChange++;
-            //} else{
-            //    player.RewardAdd(-100f);
-            //    movesWithoutChange = 0;
-            //    player.End();
-            //}
+            if(movesWithoutChange <= 10){
+               player.RewardAdd(-0.1f);
+               player.RequestDecision();
+               movesWithoutChange++;
+            } else{
+               player.RewardAdd(-0.1f);
+               movesWithoutChange = 0;
+               player.End();
+            }
             //return changed;
+            // player.RewardAdd(-0.1f);
+            // player.RequestDecision();
             
         }
         return changed;
