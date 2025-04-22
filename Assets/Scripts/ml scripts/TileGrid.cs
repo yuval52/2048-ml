@@ -11,6 +11,7 @@ public class TileGrid : MonoBehaviour
 
     private void Awake()
     {
+        //set up grid
         rows = GetComponentsInChildren<TileRow>();
         cells = GetComponentsInChildren<TileCell>();
 
@@ -20,6 +21,8 @@ public class TileGrid : MonoBehaviour
     }
 
     public int[,] GetGridMatrix(){
+
+        //returns grid as matrix
         int[,] matrix = new int[4,4];
 
         for(int x = 0; x < 4; x++){
@@ -39,11 +42,13 @@ public class TileGrid : MonoBehaviour
 
     public TileCell GetCell(Vector2Int coordinates)
     {
+        //returns a cell at coordinates
         return GetCell(coordinates.x, coordinates.y);
     }
 
     public TileCell GetCell(int x, int y)
     {
+        //returns a cell at coordinates
         if (x >= 0 && x < Width && y >= 0 && y < Height) {
             return rows[y].cells[x];
         } else {
@@ -53,6 +58,7 @@ public class TileGrid : MonoBehaviour
 
     public TileCell GetAdjacentCell(TileCell cell, Vector2Int direction)
     {
+        //returns cell adjacent to specified cell
         Vector2Int coordinates = cell.coordinates;
         coordinates.x += direction.x;
         coordinates.y -= direction.y;
@@ -62,21 +68,13 @@ public class TileGrid : MonoBehaviour
 
     public TileCell GetRandomEmptyCell()
     {
+        //returns a random cell out of the empty cells on the board
         int index = Random.Range(0, cells.Length);
         int startingIndex = index;
 
         while (cells[index].Occupied)
         {
             index = Random.Range(0, cells.Length);
-
-            // if (index >= cells.Length) {
-            //     index = 0;
-            // }
-
-            // // all cells are occupied
-            // if (index == startingIndex) {
-            //     return null;
-            // }
         }
 
         return cells[index];

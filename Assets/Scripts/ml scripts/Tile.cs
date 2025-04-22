@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
 
     private void Awake()
     {
+        //set up tile
         background = GetComponent<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         manager = FindObjectOfType<GameManager>();
@@ -22,6 +23,7 @@ public class Tile : MonoBehaviour
 
     public void SetState(TileState state)
     {
+        //set current tile state
         this.state = state;
 
         background.color = state.backgroundColor;
@@ -31,6 +33,7 @@ public class Tile : MonoBehaviour
 
     public void Spawn(TileCell cell)
     {
+        //spawn at cell
         if (this.cell != null) {
             this.cell.tile = null;
         }
@@ -43,6 +46,7 @@ public class Tile : MonoBehaviour
 
     public void MoveTo(TileCell cell)
     {
+        //move to cell
         if (this.cell != null) {
             this.cell.tile = null;
         }
@@ -55,6 +59,7 @@ public class Tile : MonoBehaviour
 
     public void Merge(TileCell cell)
     {
+        //merge to cell
         if (this.cell != null) {
             this.cell.tile = null;
         }
@@ -67,6 +72,7 @@ public class Tile : MonoBehaviour
 
     private IEnumerator Animate(Vector3 to, bool merging)
     {
+        //animate movement to cell
         float elapsed = 0f;
         float duration = manager.moveTime;
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerTile : MonoBehaviour
 {
-    public TileState state { get; private set; }
+    public TileState state;
     public PlayerTileCell cell { get; private set; }
     public bool locked { get; set; }
 

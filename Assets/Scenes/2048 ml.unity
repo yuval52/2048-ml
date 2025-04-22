@@ -4539,15 +4539,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f36f0d5cfb4f21a42b3a8e0bce5b019c, type: 2}
   - {fileID: 11400000, guid: 6d4af6137c0364f46b0872aa144c1208, type: 2}
   - {fileID: 11400000, guid: 2d0d3a6ba5b4fcd4c824edc4682d17ef, type: 2}
-  - {fileID: 11400000, guid: a4bce3d4979f95a4998b01a1da7bf222, type: 2}
-  - {fileID: 11400000, guid: 9ff9b3bf772b6d94cbaeae7c67f7cc44, type: 2}
-  - {fileID: 11400000, guid: 5a2857c81bbf49146aa1bf8fb1a19c4b, type: 2}
-  - {fileID: 11400000, guid: 19b4310b755bd894a999f0202d2f671d, type: 2}
-  - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
-  - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
+  - {fileID: 11400000, guid: a87203f58c806cb4184e0404a55f0de6, type: 2}
+  - {fileID: 11400000, guid: 0ef226033015b1f408628eb65d929784, type: 2}
+  - {fileID: 11400000, guid: 65467fc0f4474df4cb0525dd9c809dd1, type: 2}
+  - {fileID: 11400000, guid: c0ff4bb0ad426fd44b06e4d458d98e07, type: 2}
+  - {fileID: 11400000, guid: 75526bac6ca73ed4db0e086e8b097a8e, type: 2}
+  - {fileID: 11400000, guid: e2d539a70eff7f6489e8a3bcf228bda2, type: 2}
   grid: {fileID: 1761606471}
-  empty: 16
-  prevEmpty: 16
   player: {fileID: 1493065536}
   highestNum: 2
   manager: {fileID: 1601929139}
@@ -7006,7 +7004,6 @@ MonoBehaviour:
   scoreText: {fileID: 791552736}
   countText: {fileID: 242512518}
   gameCount: 0
-  countLimit: 100
   player: {fileID: 1493065536}
   highestTiles: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   percentageTiles:
@@ -7564,7 +7561,7 @@ GameObject:
   - component: {fileID: 1761606471}
   m_Layer: 5
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

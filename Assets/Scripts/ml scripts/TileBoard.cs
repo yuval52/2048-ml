@@ -10,31 +10,26 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private TileState[] tileStates;
 
     public TileGrid grid;
-    //public TileGrid demoGrid;
     private List<Tile> tiles;
-    //private List<Tile> demoTiles;
-    private bool waiting;
 
-    public int empty = 16;
-    public int prevEmpty = 16;
-    public Player player;
+    private int empty = 16;
+    [SerializeField] private Player player;
 
     public int highestNum = 2;
 
-    public GameManager manager;
+    [SerializeField] private GameManager manager;
 
     private int movesWithoutChange = 0;
 
     private void Awake()
     {
-        //grid = GetComponentInChildren<TileGrid>();
-        //manager = GetComponent<GameManager>();
+        //create list of tiles
         tiles = new List<Tile>(16);
-        //demoTiles = new List<Tile>(16);
     }
 
     public void ClearBoard()
     {
+        //loop through grid and reset the board
         foreach (var cell in grid.cells) {
             cell.tile = null;
         }
@@ -45,22 +40,14 @@ public class TileBoard : MonoBehaviour
 
         tiles.Clear();
 
-        // foreach (var cell in demoGrid.cells) {
-        //     cell.tile = null;
-        // }
-
-        // foreach (var tile in demoTiles) {
-        //     Destroy(tile.gameObject);
-        // }
-
-        // demoTiles.Clear();
+        //resets the highest number reached
         highestNum = 2;
     }
 
     public void CreateTile()
     {
+        //creates a tile in a random empty spot after a move
         Tile tile = Instantiate(tilePrefab, grid.transform);
-
         
         int num = UnityEngine.Random.Range(0, 10);
         if(num == 9){
@@ -71,118 +58,12 @@ public class TileBoard : MonoBehaviour
         tile.Spawn(grid.GetRandomEmptyCell());
         tiles.Add(tile);
         
-        // empty = grid.Size - tiles.Count;
-        // player.RewardAdd(3 * (empty-prevEmpty));
-        // prevEmpty = empty;
-        player.RewardAdd(1f * (float)empty / 16.0f);
+        //rewards for fraction of empty cells
+        player.RewardAdd((float)empty / 16.0f);
     }
 
-    // private void Update()
-    // {
-    //     if (waiting) return;
-
-    //     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-    //         Move(Vector2Int.up, 0, 1, 1, 1);
-    //     } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-    //         Move(Vector2Int.left, 1, 1, 0, 1);
-    //     } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-    //         Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-    //     } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-    //         Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-    //     }
-    // }
-
-    // public void MakeMove(float[] moves){
-    //     if (waiting) return;
-
-    //     int[] moveArr = { 0, 1, 2, 3};
-
-    //     float large = moves[0];
-    //     int index = 0;
-    //     for (int i = 0; i < 4; i++) {
-    //         if (moves[i] > large)
-    //         {
-    //             large = moves[i];
-    //             index = i;
-    //         }
-    //     }
-    //     if (index != 0)
-    //     {
-    //         float buffer = moves[0];
-    //         moves[0] = moves[index];
-    //         moves[index] = buffer;
-
-    //         int numBuffer = moveArr[0];
-    //         moveArr[0] = moveArr[index];
-    //         moveArr[index] = numBuffer;
-    //     }
-
-    //     large = moves[1];
-    //     index = 1;
-    //     for (int i = 1; i < 4; i++)
-    //     {
-    //         if (moves[i] > large)
-    //         {
-    //             large = moves[i];
-    //             index = i;
-    //         }
-    //     }
-    //     if (index != 1)
-    //     {
-    //         float buffer = moves[1];
-    //         moves[1] = moves[index];
-    //         moves[index] = buffer;
-
-    //         int numBuffer = moveArr[1];
-    //         moveArr[1] = moveArr[index];
-    //         moveArr[index] = numBuffer;
-    //     }
-
-    //     if (moves[3] > moves[2])
-    //     {
-    //         float buffer = moves[2];
-    //         moves[2] = moves[3];
-    //         moves[3] = buffer;
-
-    //         int numBuffer = moveArr[2];
-    //         moveArr[2] = moveArr[3];
-    //         moveArr[3] = numBuffer;
-    //     }
-
-    //     for (int i = 0; i < moveArr.Length; i++)
-    //     {
-    //         int move = moveArr[i];
-    //         bool changed = false;
-    //         if (move == 1)
-    //         {
-    //             changed = Move(Vector2Int.up, 0, 1, 1, 1);
-    //         }
-    //         else if (move == 2)
-    //         {
-    //             changed = Move(Vector2Int.left, 1, 1, 0, 1);
-    //         }
-    //         else if (move == 0)
-    //         {
-    //             changed = Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-    //         }
-    //         else if (move == 3)
-    //         {
-    //             changed = Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-    //         }
-
-    //         if (changed)
-    //         {
-    //             break;
-    //         }
-
-    //     }
-
-
-        
-
-    // }
-
     public void MakeMove(int move){
+        //decode move and make it
         if (move == 1)
         {
             Move(Vector2Int.up, 0, 1, 1, 1);
@@ -203,6 +84,7 @@ public class TileBoard : MonoBehaviour
 
     public bool CanMakeMove(int move)
     {
+        //decode and check if move is possible without making it
         if (move == 1)
         {
             return CanMove(Vector2Int.up, 0, 1, 1, 1);
@@ -224,10 +106,11 @@ public class TileBoard : MonoBehaviour
         }
     }
 
-    private bool Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
+    private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         bool changed = false;
 
+        //move all tiles in the direction of the move
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
         {
             for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
@@ -241,10 +124,11 @@ public class TileBoard : MonoBehaviour
         }
 
         if (changed) {
+            //wait for move to end
             StartCoroutine(WaitForChanges());
             movesWithoutChange = 0;
-            // return changed;
         } else{
+            //agent made an illegal move
             if(movesWithoutChange <= 10){
                player.RewardAdd(-0.1f);
                player.RequestDecision();
@@ -254,20 +138,13 @@ public class TileBoard : MonoBehaviour
                movesWithoutChange = 0;
                player.End();
             }
-            //return changed;
-            // player.RewardAdd(-0.1f);
-            // player.RequestDecision();
-            
         }
-        return changed;
 
-        
     }
 
     public bool CanMove(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
-        bool changed = false;
-
+        //check if any tiles can move in a direction
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
         {
             for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
@@ -275,11 +152,13 @@ public class TileBoard : MonoBehaviour
                 TileCell cell = grid.GetCell(x, y);
 
                 if (cell.Occupied) {
-                    changed |= CanMoveTile(cell.tile, direction);
+                    if(CanMoveTile(cell.tile, direction)){
+                        return true;
+                    }
                 }
             }
         }
-        return changed;
+        return false;
     }
 
     private bool MoveTile(Tile tile, Vector2Int direction)
@@ -291,6 +170,7 @@ public class TileBoard : MonoBehaviour
         {
             if (adjacent.Occupied)
             {
+                //merge tile if possible
                 if (CanMerge(tile, adjacent.tile))
                 {
                     MergeTiles(tile, adjacent.tile);
@@ -304,6 +184,7 @@ public class TileBoard : MonoBehaviour
             adjacent = grid.GetAdjacentCell(adjacent, direction);
         }
 
+        //move tile if possible
         if (newCell != null)
         {
             tile.MoveTo(newCell);
@@ -315,19 +196,12 @@ public class TileBoard : MonoBehaviour
 
     public bool CanMoveTile(Tile tile, Vector2Int direction)
     {
-        //TileCell newCell = null;
         TileCell adjacent = grid.GetAdjacentCell(tile.cell, direction);
 
+        //can tile be moved or merged
         if (adjacent.Occupied)
         {
-            if (CanMerge(tile, adjacent.tile))
-            {
-                //MergeTiles(tile, adjacent.tile);
-                return true;
-            } else
-            {
-                return false;
-            }
+            return CanMerge(tile, adjacent.tile);
         } else{
             return true;
         }
@@ -335,42 +209,36 @@ public class TileBoard : MonoBehaviour
 
     private bool CanMerge(Tile a, Tile b)
     {
+        //are tiles the same
         return a.state == b.state && !b.locked;
     }
 
     private void MergeTiles(Tile a, Tile b)
     {
+        //merge tiles
         tiles.Remove(a);
         a.Merge(b.cell);
 
+        //set new tile state
         int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
         TileState newState = tileStates[index];
-
         b.SetState(newState);
 
-        // if(newState.number > highestNum){
-        //     highestNum = newState.number;
-        //     player.AddReward((int)Math.Log(highestNum, 2));
-        // } else{
-        //     player.AddReward((int)Math.Log(newState.number, 2));
-        // }
-
-        // player.RewardAdd(1f);
+        //reward for merge
         player.AddReward((int)Math.Log(highestNum, 2));
+        //reward for new highest tile
         if(newState.number > highestNum){
             highestNum = newState.number;
             player.AddReward(1f);
         }
 
-        // if(newState.number > highestNum){
-        //     highestNum = newState.number;
-        // }
-
+        //increase curreent score
         GameManager.Instance.IncreaseScore(newState.number);
     }
 
     private int IndexOf(TileState state)
     {
+        //return index of tile state
         for (int i = 0; i < tileStates.Length; i++)
         {
             if (state == tileStates[i]) {
@@ -383,11 +251,8 @@ public class TileBoard : MonoBehaviour
 
     private IEnumerator WaitForChanges()
     {
-        waiting = true;
-
+        //wait for ongoing board changes
         yield return new WaitForSeconds(manager.moveTime);
-
-        waiting = false;
 
         foreach (var tile in tiles) {
             tile.locked = false;
@@ -401,11 +266,13 @@ public class TileBoard : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
+        //request next move from agent
         player.RequestDecision();
     }
 
     public bool CheckForGameOver()
     {
+        //check if board is full
         if (tiles.Count != grid.Size) {
             return false;
         }
@@ -416,7 +283,8 @@ public class TileBoard : MonoBehaviour
             TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
             TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
             TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
-
+            
+            //check if tile can move or merge
             if (up != null && CanMerge(tile, up.tile)) {
                 return false;
             }
